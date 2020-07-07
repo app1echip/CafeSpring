@@ -20,15 +20,24 @@ public class UserController {
 
     @PostMapping("/update")
     public @ResponseBody
-    String update(@RequestBody User user) {
+    String update(@RequestParam String username,
+                  @RequestParam String password,
+                  @RequestParam String email,
+                  @RequestParam String phone) {
+        User user = userService.findByUsername(username);
+        if (user == null) user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setPhone(phone);
         userService.update(user);
         return "Done";
     }
 
     @PostMapping("/delete")
     public @ResponseBody
-    String delete(@RequestBody User user) {
-        userService.deleteById(user.getId());
+    String delete(@RequestParam String id) {
+        userService.deleteById(id);
         return "Done";
     }
 }

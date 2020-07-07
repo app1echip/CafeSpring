@@ -9,6 +9,8 @@ import java.util.List;
 public interface DishRepository extends JpaRepository<Dish, Integer> {
     List<Dish> findAllByCategory(Category category);
 
+    Dish findByName(String name);
+
     List<Dish> findAllByNameLike(String name);
 
     void deleteById(String id);

@@ -19,4 +19,8 @@ public class CategoryService {
     public Category get(String id) {
         return categoryRepository.findById(id).orElse(null);
     }
+
+    public void addNewCategory(Category category) {
+        categoryRepository.save(category);
+    }
 }

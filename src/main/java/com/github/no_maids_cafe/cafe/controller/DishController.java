@@ -21,20 +21,34 @@ public class DishController {
 
     @PostMapping("/update")
     public @ResponseBody
-    String update(@RequestBody Dish dish) {
+    String update(@RequestParam String name,
+                  @RequestParam String category,
+                  @RequestParam Double price,
+                  @RequestParam Integer stock,
+                  @RequestParam Integer sales,
+                  @RequestParam String description) {
+        Dish dish = dishService.findByName(name);
+        if (dish == null) dish = new Dish();
+        dish.setName(name);
+        dish.setCategory(category);
+        dish.setPrice(price);
+        dish.setStock(stock);
+        dish.setSales(sales);
+        dish.setDescription(description);
         dishService.update(dish);
         return "Done";
     }
 
     @PostMapping("/delete")
     public @ResponseBody
-    String delete(@RequestBody Dish dish) {
-        dishService.deleteById(dish.getId());
+    String delete(@RequestParam String id) {
+        dishService.deleteById(id);
         return "Done";
     }
 
-    @GetMapping("/find")
-    public Iterable<Dish> find(@RequestParam String keyword) {
-        return dishService.findByName(keyword);
+    @PostMapping("/search")
+    public @ResponseBody
+    Iterable<Dish> search(@RequestParam String keyword) {
+        return dishService.searchByName(keyword);
     }
 }

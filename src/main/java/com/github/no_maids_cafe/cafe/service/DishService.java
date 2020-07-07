@@ -30,7 +30,11 @@ public class DishService {
         return dishRepository.findAllByCategory(categoryService.get(category));
     }
 
-    public List<Dish> findByName(String name) {
+    public Dish findByName(String name) {
+        return dishRepository.findByName(name);
+    }
+
+    public List<Dish> searchByName(String name) {
         return dishRepository.findAllByNameLike('%' + name + '%');
     }
 }

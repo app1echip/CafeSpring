@@ -3,6 +3,7 @@ package com.github.no_maids_cafe.cafe.service;
 import com.github.no_maids_cafe.cafe.entity.Category;
 import com.github.no_maids_cafe.cafe.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +21,23 @@ public class CategoryService {
         return categoryRepository.findById(id).orElse(null);
     }
 
-    public void addNewCategory(Category category) {
-        categoryRepository.save(category);
+    public boolean update(Category category) {
+        if (category.getId() == null)
+            category.setId(new Category().getId());
+        try {
+            categoryRepository.save(category);
+        } catch (DataIntegrityViolationException exception) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean delete(Category category) {
+        try {
+            categoryRepository.delete(category);
+        } catch (DataIntegrityViolationException exception) {
+            return false;
+        }
+        return true;
     }
 }

@@ -3,6 +3,7 @@ package com.github.no_maids_cafe.cafe.service;
 import com.github.no_maids_cafe.cafe.entity.Dish;
 import com.github.no_maids_cafe.cafe.repository.DishRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,23 +12,34 @@ import java.util.List;
 public class DishService {
     @Autowired
     private DishRepository dishRepository;
-    @Autowired
-    private CategoryService categoryService;
 
     public List<Dish> list() {
         return dishRepository.findAll();
     }
 
-    public void update(Dish dish) {
-        dishRepository.save(dish);
+    public boolean update(Dish dish) {
+        if (dish.getId() == null) {
+            dish.setId(new Dish().getId());
+        }
+        try {
+            dishRepository.save(dish);
+        } catch (DataIntegrityViolationException exception) {
+            return false;
+        }
+        return true;
     }
 
-    public void deleteById(String id) {
-        dishRepository.deleteById(id);
+    public boolean delete(Dish dish) {
+        try {
+            dishRepository.delete(dish);
+        } catch (DataIntegrityViolationException exception) {
+            return false;
+        }
+        return true;
     }
 
     public List<Dish> listByCategory(String category) {
-        return dishRepository.findAllByCategory(categoryService.get(category));
+        return dishRepository.findAllByCategory(category);
     }
 
     public Dish findByName(String name) {

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -14,30 +16,19 @@ public class UserController {
 
     @GetMapping("/list")
     public @ResponseBody
-    Iterable<User> list() {
+    List<User> list() {
         return userService.list();
     }
 
     @PostMapping("/update")
     public @ResponseBody
-    String update(@RequestParam String username,
-                  @RequestParam String password,
-                  @RequestParam String email,
-                  @RequestParam String phone) {
-        User user = userService.findByUsername(username);
-        if (user == null) user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setEmail(email);
-        user.setPhone(phone);
-        userService.update(user);
-        return "Done";
+    boolean update(@RequestBody User user) {
+        return userService.update(user);
     }
 
     @PostMapping("/delete")
     public @ResponseBody
-    String delete(@RequestParam String id) {
-        userService.deleteById(id);
-        return "Done";
+    boolean delete(@RequestBody User user) {
+        return userService.delete(user);
     }
 }

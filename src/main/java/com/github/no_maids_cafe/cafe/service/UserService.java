@@ -3,6 +3,7 @@ package com.github.no_maids_cafe.cafe.service;
 import com.github.no_maids_cafe.cafe.entity.User;
 import com.github.no_maids_cafe.cafe.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,11 +25,23 @@ public class UserService {
         return userRepository.getByUsernameAndPassword(username, password);
     }
 
-    public void update(User user) {
-        userRepository.save(user);
+    public boolean update(User user) {
+        if (user.getId() == null)
+            user.setId(new User().getId());
+        try {
+            userRepository.save(user);
+        } catch (DataIntegrityViolationException exception) {
+            return false;
+        }
+        return true;
     }
 
-    public void deleteById(String id) {
-        userRepository.deleteById(id);
+    public boolean delete(User user) {
+        try {
+            userRepository.delete(user);
+        } catch (DataIntegrityViolationException exception) {
+            return false;
+        }
+        return true;
     }
 }

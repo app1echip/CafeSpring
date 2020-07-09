@@ -1,7 +1,5 @@
 package com.github.no_maids_cafe.cafe.entity;
 
-import org.aspectj.weaver.ast.Or;
-
 import javax.persistence.*;
 
 @Entity

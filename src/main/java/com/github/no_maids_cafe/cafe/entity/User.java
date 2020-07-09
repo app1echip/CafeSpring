@@ -1,13 +1,10 @@
 package com.github.no_maids_cafe.cafe.entity;
 
-import org.aspectj.weaver.ast.Or;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import java.util.Set;
 
 @Entity
 public class User {

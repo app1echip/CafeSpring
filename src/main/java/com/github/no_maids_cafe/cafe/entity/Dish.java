@@ -3,9 +3,9 @@ package com.github.no_maids_cafe.cafe.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
+@Table(name = "dish")
 public class Dish {
     @Id
     @GeneratedValue(generator = "uuid")
@@ -18,8 +18,6 @@ public class Dish {
     private Integer sales;
     private String description;
     private String picture;
-    @OneToMany(mappedBy = "dish")
-    Set<OrderDish> orderDishes;
 
     public String getId() {
         return id;

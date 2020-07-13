@@ -6,21 +6,20 @@ import javax.persistence.*;
 @Table(name = "order_dish")
 public class OrderDish {
     @EmbeddedId
-    OrderDishKey id;
-    @ManyToOne
-    @MapsId("order")
-    @JoinColumn(name = "order")
-    Order order;
-
-    @ManyToOne
-    @MapsId("dish")
-    @JoinColumn(name = "dish")
-    Dish dish;
+    private OrderDishId id;
 
     private Integer qty;
 
+    public OrderDishId getId() {
+        return id;
+    }
+
     public Integer getQty() {
         return qty;
+    }
+
+    public void setId(OrderDishId id) {
+        this.id = id;
     }
 
     public void setQty(Integer qty) {

@@ -4,9 +4,9 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
+@Table(name = "`order`")
 public class Order {
     @Id
     @GeneratedValue(generator = "uuid")
@@ -15,8 +15,6 @@ public class Order {
     private Date date;
     private Integer no;
     private String user;
-    @OneToMany(mappedBy = "order")
-    Set<OrderDish> orderDishes;
 
     public String getId() {
         return id;

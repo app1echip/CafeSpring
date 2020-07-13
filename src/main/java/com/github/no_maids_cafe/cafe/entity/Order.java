@@ -12,8 +12,7 @@ public class Order {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    private Date date;
-    private Integer no;
+    private Date time;
     private String user;
 
     public String getId() {
@@ -24,20 +23,12 @@ public class Order {
         this.id = id;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getTime() {
+        return time;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Integer getNo() {
-        return no;
-    }
-
-    public void setNo(Integer no) {
-        this.no = no;
+    public void setTime(Date time) {
+        this.time = time;
     }
 
     public String getUser() {

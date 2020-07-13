@@ -5,8 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "dish")
-public class Dish {
+public class Food {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -14,10 +13,9 @@ public class Dish {
     private String name;
     private String category;
     private Double price;
-    private Integer stock;
     private Integer sales;
-    private String description;
-    private String picture;
+    private String desc;
+    private String img;
 
     public String getId() {
         return id;
@@ -51,14 +49,6 @@ public class Dish {
         this.price = price;
     }
 
-    public Integer getStock() {
-        return stock;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
-
     public Integer getSales() {
         return sales;
     }
@@ -67,19 +57,19 @@ public class Dish {
         this.sales = sales;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
-    public String getPicture() {
-        return picture;
+    public String getImg() {
+        return img;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setImg(String img) {
+        this.img = img;
     }
 }

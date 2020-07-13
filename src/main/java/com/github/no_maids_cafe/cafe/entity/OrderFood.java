@@ -3,14 +3,12 @@ package com.github.no_maids_cafe.cafe.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "order_dish")
-public class OrderDish {
+public class OrderFood {
     @EmbeddedId
-    private OrderDishId id;
-
+    private OrderFoodId id;
     private Integer qty;
 
-    public OrderDishId getId() {
+    public OrderFoodId getId() {
         return id;
     }
 
@@ -18,7 +16,7 @@ public class OrderDish {
         return qty;
     }
 
-    public void setId(OrderDishId id) {
+    public void setId(OrderFoodId id) {
         this.id = id;
     }
 

@@ -1,7 +1,7 @@
 package com.github.no_maids_cafe.cafe.service;
 
-import com.github.no_maids_cafe.cafe.entity.OrderDish;
-import com.github.no_maids_cafe.cafe.repository.OrderDishRepository;
+import com.github.no_maids_cafe.cafe.entity.Food;
+import com.github.no_maids_cafe.cafe.repository.FoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -9,26 +9,29 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class OrderDishService {
+public class FoodService {
     @Autowired
-    private OrderDishRepository orderdishRepository;
+    private FoodRepository foodRepository;
 
-    public List<OrderDish> list() {
-        return orderdishRepository.findAll();
+    public List<Food> list() {
+        return foodRepository.findAll();
     }
 
-    public String update(OrderDish orderdish) {
+    public String update(Food food) {
+        if (food.getId() == null) {
+            food.setId(new Food().getId());
+        }
         try {
-            orderdishRepository.save(orderdish);
+            foodRepository.save(food);
         } catch (DataIntegrityViolationException exception) {
             return "failure: " + exception.getMessage();
         }
         return "success";
     }
 
-    public String delete(OrderDish orderdish) {
+    public String delete(Food food) {
         try {
-            orderdishRepository.delete(orderdish);
+            foodRepository.delete(food);
         } catch (DataIntegrityViolationException exception) {
             return "failure: " + exception.getMessage();
         }

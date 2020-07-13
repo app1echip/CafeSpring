@@ -17,27 +17,24 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-    public Category get(String id) {
-        return categoryRepository.findById(id).orElse(null);
-    }
-
-    public boolean update(Category category) {
-        if (category.getId() == null)
+    public String update(Category category) {
+        if (category.getId() == null) {
             category.setId(new Category().getId());
+        }
         try {
             categoryRepository.save(category);
         } catch (DataIntegrityViolationException exception) {
-            return false;
+            return "failure: " + exception.getMessage();
         }
-        return true;
+        return "success";
     }
 
-    public boolean delete(Category category) {
+    public String delete(Category category) {
         try {
             categoryRepository.delete(category);
         } catch (DataIntegrityViolationException exception) {
-            return false;
+            return "failure: " + exception.getMessage();
         }
-        return true;
+        return "success";
     }
 }

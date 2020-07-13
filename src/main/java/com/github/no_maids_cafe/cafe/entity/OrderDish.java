@@ -17,7 +17,6 @@ public class OrderDish {
     @JoinColumn(name = "dish")
     Dish dish;
 
-
     private Integer qty;
 
     public Integer getQty() {

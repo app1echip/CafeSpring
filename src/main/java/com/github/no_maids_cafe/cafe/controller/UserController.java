@@ -6,29 +6,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/list")
-    public @ResponseBody
-    List<User> list() {
+    @GetMapping("")
+    public @ResponseBody Iterable<User> list() {
         return userService.list();
     }
 
     @PostMapping("/update")
-    public @ResponseBody
-    boolean update(@RequestBody User user) {
+    public @ResponseBody String update(@RequestBody User user) {
         return userService.update(user);
     }
 
     @PostMapping("/delete")
-    public @ResponseBody
-    boolean delete(@RequestBody User user) {
+    public @ResponseBody String delete(@RequestBody User user) {
         return userService.delete(user);
     }
 }

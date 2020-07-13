@@ -50,4 +50,3 @@ public class Order {
         this.user = user;
     }
 }
-

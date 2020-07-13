@@ -17,36 +17,24 @@ public class DishService {
         return dishRepository.findAll();
     }
 
-    public boolean update(Dish dish) {
+    public String update(Dish dish) {
         if (dish.getId() == null) {
             dish.setId(new Dish().getId());
         }
         try {
             dishRepository.save(dish);
         } catch (DataIntegrityViolationException exception) {
-            return false;
+            return "failure: " + exception.getMessage();
         }
-        return true;
+        return "success";
     }
 
-    public boolean delete(Dish dish) {
+    public String delete(Dish dish) {
         try {
             dishRepository.delete(dish);
         } catch (DataIntegrityViolationException exception) {
-            return false;
+            return "failure: " + exception.getMessage();
         }
-        return true;
-    }
-
-    public List<Dish> listByCategory(String category) {
-        return dishRepository.findAllByCategory(category);
-    }
-
-    public Dish findByName(String name) {
-        return dishRepository.findByName(name);
-    }
-
-    public List<Dish> searchByName(String name) {
-        return dishRepository.findAllByNameLike('%' + name + '%');
+        return "success";
     }
 }

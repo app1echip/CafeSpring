@@ -6,29 +6,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/category")
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping("/list")
-    public @ResponseBody
-    List<Category> list() {
+    @GetMapping("")
+    public @ResponseBody Iterable<Category> list() {
         return categoryService.list();
     }
 
     @PostMapping("/update")
-    public @ResponseBody
-    boolean update(@RequestBody Category category) {
+    public @ResponseBody String update(@RequestBody Category category) {
         return categoryService.update(category);
     }
 
     @PostMapping("/delete")
-    public @ResponseBody
-    boolean delete(@RequestBody Category category) {
+    public @ResponseBody String delete(@RequestBody Category category) {
         return categoryService.delete(category);
     }
 }

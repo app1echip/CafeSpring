@@ -17,13 +17,13 @@ public class FoodController {
     public @ResponseBody Iterable<Food> list() {
         return foodService.list();
     }
-    @PreAuthorize("hasRole('ADMIN')")
+    // @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/update")
     public @ResponseBody String update(@RequestBody Food food) {
         return foodService.update(food);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    // @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/delete")
     public @ResponseBody String delete(@RequestBody Food food) {
         return foodService.delete(food);

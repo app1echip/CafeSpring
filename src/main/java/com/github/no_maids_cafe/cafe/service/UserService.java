@@ -47,6 +47,13 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
+    public String getId(String username) {
+        User user = findByUsername(username);
+        if (user == null)
+            return null;
+        return user.getId();
+    }
+
     public boolean add(User user) {
         if (user.getId() != null || userRepository.findByUsername(user.getUsername()) != null)
             return false;

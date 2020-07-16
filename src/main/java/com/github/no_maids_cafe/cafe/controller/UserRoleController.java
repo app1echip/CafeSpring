@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/userrole")
+@RequestMapping("/role")
 public class UserRoleController {
     @Autowired
     private UserRoleService UserRoleService;

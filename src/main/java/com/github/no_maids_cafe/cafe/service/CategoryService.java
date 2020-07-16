@@ -38,4 +38,8 @@ public class CategoryService {
         }
         return "success";
     }
+
+    public String getName(String id) {
+        return categoryRepository.findById(id);
+    }
 }

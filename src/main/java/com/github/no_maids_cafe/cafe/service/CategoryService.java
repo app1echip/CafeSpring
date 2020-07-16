@@ -7,6 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CategoryService {
@@ -19,7 +20,7 @@ public class CategoryService {
 
     public String update(Category category) {
         if (category.getId() == null) {
-            category.setId(new Category().getId());
+            category.setId(UUID.randomUUID().toString());
         }
         try {
             categoryRepository.save(category);

@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.20, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.30, for Linux (x86_64)
 --
 -- Host: localhost    Database: cafe
 -- ------------------------------------------------------
--- Server version	8.0.20
+-- Server version	5.7.30-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,12 +21,12 @@
 
 DROP TABLE IF EXISTS `category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `category` (
   `id` char(36) NOT NULL,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,19 +45,19 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `food`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `food` (
   `id` char(36) NOT NULL,
   `name` varchar(255) NOT NULL,
   `category` char(36) DEFAULT NULL,
   `price` decimal(13,2) DEFAULT NULL,
-  `sales` int DEFAULT NULL,
+  `sales` int(11) DEFAULT NULL,
   `desc` text,
   `img` text,
   PRIMARY KEY (`id`),
   KEY `dish_category_id_fk` (`category`),
   CONSTRAINT `dish_category_id_fk` FOREIGN KEY (`category`) REFERENCES `category` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +76,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `order` (
   `id` char(36) NOT NULL,
   `time` datetime DEFAULT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE `order` (
   PRIMARY KEY (`id`),
   KEY `order_user_id_fk` (`user`),
   CONSTRAINT `order_user_id_fk` FOREIGN KEY (`user`) REFERENCES `user` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,16 +103,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `order_food`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `order_food` (
   `order` char(36) NOT NULL,
   `food` char(36) NOT NULL,
-  `qty` int DEFAULT NULL,
+  `qty` int(11) DEFAULT NULL,
   PRIMARY KEY (`order`,`food`),
   KEY `order_food_food_id_fk` (`food`),
   CONSTRAINT `order_food_food_id_fk` FOREIGN KEY (`food`) REFERENCES `food` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `order_food_order_id_fk` FOREIGN KEY (`order`) REFERENCES `order` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,7 +131,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `id` char(36) NOT NULL,
   `username` varchar(255) NOT NULL,
@@ -140,7 +140,7 @@ CREATE TABLE `user` (
   `phone` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_username_uindex` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,8 +149,53 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('2f729779-d174-44d5-b74a-5e0797f50f92','user_c',NULL,'pass_c',NULL),('468e78f3-0532-4a10-99d5-4cddf7618b11','user_a',NULL,'pass_a',NULL),('d3ce1d07-34f9-4333-a557-6cfdd06bdbcc','user_b',NULL,'pass_b',NULL);
+INSERT INTO `user` VALUES ('2f729779-d174-44d5-b74a-5e0797f50f92','user_c',NULL,'pass_c',NULL),('468e78f3-0532-4a10-99d5-4cddf7618b11','user_a',NULL,'pass_a',NULL),('d3ce1d07-34f9-4333-a557-6cfdd06bdbcc','user_b',NULL,'pass_b',NULL),('fa54097d-6d95-44df-b4b0-a2d6283d9500','cafe_master',NULL,'secret_agent',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+ALTER DATABASE `cafe` CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`cafer`@`localhost`*/ /*!50003 trigger auto_user_role after insert on user for each row
+          BEGIN
+              insert into user_role values (NEW.id,'ROLE_USER');
+          end */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+ALTER DATABASE `cafe` CHARACTER SET utf8 COLLATE utf8_general_ci ;
+
+--
+-- Table structure for table `user_role`
+--
+
+DROP TABLE IF EXISTS `user_role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_role` (
+  `user` char(36) NOT NULL,
+  `role` varchar(10) NOT NULL DEFAULT 'ROLE_USER',
+  PRIMARY KEY (`user`),
+  CONSTRAINT `user_role_user_id_fk` FOREIGN KEY (`user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_role`
+--
+
+LOCK TABLES `user_role` WRITE;
+/*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
+INSERT INTO `user_role` VALUES ('2f729779-d174-44d5-b74a-5e0797f50f92','ROLE_USER'),('468e78f3-0532-4a10-99d5-4cddf7618b11','ROLE_USER'),('d3ce1d07-34f9-4333-a557-6cfdd06bdbcc','ROLE_USER'),('fa54097d-6d95-44df-b4b0-a2d6283d9500','ROLE_ADMIN');
+/*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -162,4 +207,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-13 18:50:45
+-- Dump completed on 2020-07-17  1:08:59

@@ -14,6 +14,7 @@ public class Food {
     private String category;
     private Double price;
     private Integer sales;
+    @Column(name = "`desc`")
     private String desc;
     private String img;
 

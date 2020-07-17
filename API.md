@@ -87,7 +87,7 @@ Authorization: Cafe eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyX2EiLCJleHAiOjE1OTQ5NzY
 
 ### GET /profile
 
-获得自己的个人信息，注意由于Token可以严重身份故不需要指出用户名。
+获得自己的个人信息，注意由于Token可以验证身份故不需要指出用户名。
 
 #### 响应
 
@@ -105,7 +105,7 @@ Authorization: Cafe eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyX2EiLCJleHAiOjE1OTQ5NzY
 
 ### POST /profile/update
 
-更系个人信息，注意空值也覆盖原值，若一个属性不变则需要在请求中照抄。
+更系个人信息，注意空值也会覆盖原值，若一个属性不变则需要在请求中照抄。
 
 #### 请求
 
@@ -207,7 +207,7 @@ Authorization: Cafe eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyX2EiLCJleHAiOjE1OTQ5NzY
 
 - `name`, `category` - 字符串，餐点名称和餐点类别。
 - `price`, `sales` - 浮点数和整数，代表单价和销量。
-- `desc`, `img` - 字符串，前者为餐点的文本描述，后者是图片的URL（请利用公共图床）。
+- `desc`, `img` - 字符串，前者为餐点的文本描述，后者是图片的URL（可以利用公共图床）。
 
 ### GET /order
 

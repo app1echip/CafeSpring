@@ -29,7 +29,7 @@ public class ProfileController {
     public @ResponseBody ResponseEntity<?> update(User user, Principal principal) {
         user.setId(userService.getId(principal.getName()));
         String result = userService.update(user);
-        if (result.equals("/success"))
+        if (result.equals("success"))
             return ResponseEntity.ok(result);
         else
             return new ResponseEntity<String>(result, HttpStatus.INTERNAL_SERVER_ERROR);

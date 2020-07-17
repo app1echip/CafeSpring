@@ -9,6 +9,7 @@ import com.github.no_maids_cafe.cafe.service.UserService;
 import com.github.no_maids_cafe.cafe.model.OrderModel;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,9 @@ public class OrderPlaceController {
     public @ResponseBody ResponseEntity<?> newOrder(@RequestBody Map<String, Integer> content, Principal principal) {
         String user = userService.getId(principal.getName());
         String order = orderService.generate(content, user);
+        if (order == null || order.length() != 36) {
+            return new ResponseEntity<String>("failed", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         return ResponseEntity.ok(order);
     }
 }

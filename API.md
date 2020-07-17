@@ -77,7 +77,7 @@ eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyX2EiLCJleHAiOjE1OTQ5NzYzMDksImlhdCI6MTU5NDk
 Authorization: Cafe eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyX2EiLCJleHAiOjE1OTQ5NzYzMDksImlhdCI6MTU5NDk3MjcwOX0.9q7Sq682YRlIUxHtxU22V7QgJncMRgvrdgxHxwxJiF3388wp331h3L4jpBSq75NrygRt2yGY0qg-FLreAB-9WA
 ```
 
-请注意没有换行，Token前面要加一个`Cafe `和一个空格共五个字符。
+请注意没有换行，Token前面要加一个`Cafe `（有一个空格）共五个字符。
 
 登录后多数操作不需要再额外指出自己是谁，Token解密后就包含了用户名。
 

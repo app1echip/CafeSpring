@@ -34,4 +34,8 @@ public class OrderFoodService {
         }
         return "success";
     }
+
+    public List<OrderFood> getContent(String order) {
+        return orderfoodRepository.findAllByIdOrder(order);
+    }
 }

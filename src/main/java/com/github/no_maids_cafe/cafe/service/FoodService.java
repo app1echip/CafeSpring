@@ -38,4 +38,8 @@ public class FoodService {
         }
         return "success";
     }
+
+    public String getName(String id) {
+        return foodRepository.findById(id).getName();
+    }
 }

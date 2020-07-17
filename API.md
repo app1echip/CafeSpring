@@ -195,7 +195,7 @@ Authorization: Cafe eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyX2EiLCJleHAiOjE1OTQ5NzY
         "sales" : null,
         "desc" : null,
         "img" : null
-        }
+    }
 ]
 ```
 

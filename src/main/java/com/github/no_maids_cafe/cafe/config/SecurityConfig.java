@@ -21,10 +21,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         String[] anonymous = { "/authenticate", "/register" };
         String[] loggedin = {"/menu","/profile/**","/order/**"};
         http.csrf().disable()
-            .authorizeRequests()
-            .antMatchers("/*").hasRole("ADMIN")
-            .antMatchers(loggedin).authenticated()
+            .authorizeRequests()            
             .antMatchers(anonymous).permitAll()
+            .antMatchers(loggedin).authenticated()
+            .antMatchers("/*").hasRole("ADMIN")
             .anyRequest().denyAll()
             .and()
             .exceptionHandling().authenticationEntryPoint(entryPoint)

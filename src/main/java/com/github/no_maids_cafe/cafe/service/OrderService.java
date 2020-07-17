@@ -30,9 +30,9 @@ public class OrderService {
     }
 
     public String update(Order order) {
-        if (order.getId() == null) {
-            order.setId(UUID.randomUUID().toString());
-        }
+        // if (order.getId() == null) {
+        //     order.setId(UUID.randomUUID().toString());
+        // }
         try {
             orderRepository.save(order);
         } catch (DataIntegrityViolationException exception) {
@@ -52,6 +52,9 @@ public class OrderService {
 
     public String generate(Map<String, Integer> content, String user) {
         Order order = new Order();
+        order.setUser(user);
+        order.setTime(new Date());
+        this.update(order);
         String id = order.getId();
         for (Map.Entry<String, Integer> entry : content.entrySet()) {
             OrderFood orderFood = new OrderFood();
@@ -62,8 +65,6 @@ public class OrderService {
             orderFood.setQty(entry.getValue());
             orderFoodService.update(orderFood);
         }
-        order.setUser(user);
-        order.setTime(new Date());
         return id;
     }
 

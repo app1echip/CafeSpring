@@ -40,6 +40,6 @@ public class CategoryService {
     }
 
     public String getName(String id) {
-        return categoryRepository.findById(id);
+        return categoryRepository.findById(id).getName();
     }
 }

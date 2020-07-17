@@ -6,7 +6,7 @@ CafeSpring API 文档
 
 未登录状态可以注册账户以及验证登录
 
-### POST /register 
+### POST /register
 
 注册普通用户帐号
 
@@ -18,8 +18,8 @@ CafeSpring API 文档
 
 ```json
 {
-	"username": "abc",
-	"password": "pas"
+    "username": "abc",
+    "password": "pas"
 }
 ```
 
@@ -27,10 +27,10 @@ CafeSpring API 文档
 
 ```json
 {
-	"username": "abc",
-	"password": "pas",
-	"email": "a@b.c",
-	"phone": "1234578"
+    "username": "abc",
+    "password": "pas",
+    "email": "a@b.c",
+    "phone": "1234578"
 }
 ```
 
@@ -146,8 +146,6 @@ Authorization: Cafe eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyX2EiLCJleHAiOjE1OTQ5NzY
 }
 ```
 
-
-
 #### 响应
 
 成功返回消息`"success"`，失败返回状态`500`和错误消息。
@@ -162,42 +160,42 @@ Authorization: Cafe eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyX2EiLCJleHAiOjE1OTQ5NzY
 
 ```json
 [
-  {
-    "id" : "3c4f5b9e-fa5b-4366-8d96-c586253c436b",
-    "name" : "拿铁咖啡",
-    "category" : "咖啡",
-    "price" : 16.0,
-    "sales" : null,
-    "desc" : null,
-    "img" : null
-  },
-  {
-    "id" : "42c19e3a-7ebe-4e39-9455-396c12b558c8",
-    "name" : "西瓜汁",
-    "category" : "果汁",
-    "price" : 14.0,
-    "sales" : null,
-    "desc" : null,
-    "img" : null
-  },
-  {
-    "id" : "4bd57c99-f316-4067-93dd-950ee41a7acd",
-    "name" : "苹果汁",
-    "category" : "果汁",
-    "price" : 15.0,
-    "sales" : null,
-    "desc" : null,
-    "img" : null
-  },
-  {
-    "id" : "5745bb1c-ed5b-40b9-8ac4-3d4a5a45e76f",
-    "name" : "鸡翅",
-    "category" : "小吃",
-    "price" : 10.0,
-    "sales" : null,
-    "desc" : null,
-    "img" : null
-  }
+    {
+        "id" : "3c4f5b9e-fa5b-4366-8d96-c586253c436b",
+        "name" : "拿铁咖啡",
+        "category" : "咖啡",
+        "price" : 16.0,
+        "sales" : null,
+        "desc" : null,
+        "img" : null
+    },
+    {
+        "id" : "42c19e3a-7ebe-4e39-9455-396c12b558c8",
+        "name" : "西瓜汁",
+        "category" : "果汁",
+        "price" : 14.0,
+        "sales" : null,
+        "desc" : null,
+        "img" : null
+    },
+    {
+        "id" : "4bd57c99-f316-4067-93dd-950ee41a7acd",
+        "name" : "苹果汁",
+        "category" : "果汁",
+        "price" : 15.0,
+        "sales" : null,
+        "desc" : null,
+        "img" : null
+    },
+    {
+        "id" : "5745bb1c-ed5b-40b9-8ac4-3d4a5a45e76f",
+        "name" : "鸡翅",
+        "category" : "小吃",
+        "price" : 10.0,
+        "sales" : null,
+        "desc" : null,
+        "img" : null
+        }
 ]
 ```
 
@@ -219,22 +217,22 @@ Authorization: Cafe eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyX2EiLCJleHAiOjE1OTQ5NzY
 
 ```json
 [
-  {
-    "id" : "09b5e6da-c201-4b7d-b3a3-fc533f4fb770",
-    "content" : {
-      "珍珠奶茶" : 1,
-      "美式咖啡" : 1
+    {
+        "id" : "09b5e6da-c201-4b7d-b3a3-fc533f4fb770",
+        "content" : {
+            "珍珠奶茶" : 1,
+            "美式咖啡" : 1
+        },
+        "time" : "2020-07-14T00:29:29.000+00:00"
     },
-    "time" : "2020-07-14T00:29:29.000+00:00"
-  },
-  {
-    "id" : "ce1edad5-5d8b-4f70-81f8-9b16921a5727",
-    "content" : {
-      "拿铁咖啡" : 2,
-      "摩卡咖啡" : 3
-    },
-    "time" : "2020-07-09T03:28:00.000+00:00"
-  }
+    {
+        "id" : "ce1edad5-5d8b-4f70-81f8-9b16921a5727",
+        "content" : {
+            "拿铁咖啡" : 2,
+            "摩卡咖啡" : 3
+        },
+        "time" : "2020-07-09T03:28:00.000+00:00"
+    }
 ]
 ```
 
@@ -244,20 +242,20 @@ Authorization: Cafe eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyX2EiLCJleHAiOjE1OTQ5NzY
 
 创建新订单。
 
-#### 请求：
+#### 请求
 
 使用餐点ID和数量的字典（格式不合适，有空再修改）。
 
 示例，一杯拿铁和两杯苹果汁：
 
 ```json
- {
-     "3c4f5b9e-fa5b-4366-8d96-c586253c436b": 1,
-     "4bd57c99-f316-4067-93dd-950ee41a7acd": 2
- }
+{
+    "3c4f5b9e-fa5b-4366-8d96-c586253c436b": 1,
+    "4bd57c99-f316-4067-93dd-950ee41a7acd": 2
+}
 ```
 
-#### 响应：
+#### 响应
 
 成功则返回订单ID：
 
@@ -273,4 +271,4 @@ Authorization: Cafe eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyX2EiLCJleHAiOjE1OTQ5NzY
 
 管理员可用所有API
 
-> 规范和文档还待统一，暂时API，CRUD操作和对应的数据库表如下：CategoryController(category), FoodController(food), OrderController(order), OrderFishController(order_food), UserController(user) UserRoleController(user_role) 
+> 规范和文档还待统一，暂时API，CRUD操作和对应的数据库表如下：CategoryController(category), FoodController(food), OrderController(order), OrderFishController(order_food), UserController(user) UserRoleController(user_role)

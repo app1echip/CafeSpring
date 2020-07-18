@@ -2,28 +2,13 @@ package com.github.no_maids_cafe.cafe.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Table(name = "user_role")
 public class UserRole {
     @Id
-    private String user;
-    private String role;
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
+    private @Getter @Setter String user;
+    private @Getter @Setter String role;
 }

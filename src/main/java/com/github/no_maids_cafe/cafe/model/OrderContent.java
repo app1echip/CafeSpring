@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.github.no_maids_cafe.cafe.entity.Order;
-import com.github.no_maids_cafe.cafe.entity.OrderFood;
+import com.github.no_maids_cafe.cafe.entity.Ordre;
+import com.github.no_maids_cafe.cafe.entity.OrdreFood;
 
 public class OrderContent {
     private String id;
@@ -15,7 +15,7 @@ public class OrderContent {
     public OrderContent() {
     };
 
-    public OrderContent(Order order, List<OrderFood> orderFoods) {
+    public OrderContent(Ordre order, List<OrdreFood> orderFoods) {
         this.id = order.getId();
         this.time = order.getTime();
         this.content = orderFoods.stream().map(orderFood -> new Item(orderFood)).collect(Collectors.toList());
@@ -44,7 +44,7 @@ public class OrderContent {
         public Item() {
         }
 
-        public Item(OrderFood orderFood) {
+        public Item(OrdreFood orderFood) {
             this.id = orderFood.getId().getFood();
             this.qty = orderFood.getQty();
         }

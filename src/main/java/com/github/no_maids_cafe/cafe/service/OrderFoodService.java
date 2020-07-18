@@ -1,6 +1,6 @@
 package com.github.no_maids_cafe.cafe.service;
 
-import com.github.no_maids_cafe.cafe.entity.OrderFood;
+import com.github.no_maids_cafe.cafe.entity.OrdreFood;
 import com.github.no_maids_cafe.cafe.repository.OrderFoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -13,11 +13,11 @@ public class OrderFoodService {
     @Autowired
     private OrderFoodRepository orderfoodRepository;
 
-    public List<OrderFood> list() {
+    public List<OrdreFood> list() {
         return orderfoodRepository.findAll();
     }
 
-    public String update(OrderFood orderfood) {
+    public String update(OrdreFood orderfood) {
         try {
             orderfoodRepository.save(orderfood);
         } catch (DataIntegrityViolationException exception) {
@@ -26,7 +26,7 @@ public class OrderFoodService {
         return "success";
     }
 
-    public String delete(OrderFood orderfood) {
+    public String delete(OrdreFood orderfood) {
         try {
             orderfoodRepository.delete(orderfood);
         } catch (DataIntegrityViolationException exception) {
@@ -35,7 +35,7 @@ public class OrderFoodService {
         return "success";
     }
 
-    public List<OrderFood> getContent(String order) {
-        return orderfoodRepository.findAllByIdOrder(order);
+    public List<OrdreFood> getContent(String order) {
+        return orderfoodRepository.findAllByIdOrdre(order);
     }
 }

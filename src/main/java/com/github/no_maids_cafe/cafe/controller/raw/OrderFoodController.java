@@ -1,6 +1,6 @@
 package com.github.no_maids_cafe.cafe.controller.raw;
 
-import com.github.no_maids_cafe.cafe.entity.OrderFood;
+import com.github.no_maids_cafe.cafe.entity.OrdreFood;
 import com.github.no_maids_cafe.cafe.service.OrderFoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,17 +13,17 @@ public class OrderFoodController {
     private OrderFoodService orderfoodService;
 
     @GetMapping("")
-    public @ResponseBody Iterable<OrderFood> list() {
+    public @ResponseBody Iterable<OrdreFood> list() {
         return orderfoodService.list();
     }
 
     @PostMapping("/update")
-    public @ResponseBody String update(@RequestBody OrderFood orderfood) {
+    public @ResponseBody String update(@RequestBody OrdreFood orderfood) {
         return orderfoodService.update(orderfood);
     }
 
     @PostMapping("/delete")
-    public @ResponseBody String delete(@RequestBody OrderFood orderfood) {
+    public @ResponseBody String delete(@RequestBody OrdreFood orderfood) {
         return orderfoodService.delete(orderfood);
     }
 }

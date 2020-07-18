@@ -6,7 +6,7 @@ CafeSpring API 文档
 
 未登录状态可以注册账户以及验证登录
 
-### POST /register
+### POST /api/register
 
 注册普通用户帐号
 
@@ -40,7 +40,7 @@ CafeSpring API 文档
 
 失败则返回状态`409`和自定义消息。
 
-### POST /authenticate
+### POST /api/authenticate
 
 登录验证，普通用户和管理员共用，后端服务器根据JWT用户名判断角色。
 
@@ -81,76 +81,7 @@ Authorization: Cafe eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyX2EiLCJleHAiOjE1OTQ5NzY
 
 登录后多数操作不需要再额外指出自己是谁，Token解密后就包含了用户名。
 
-## 用户登录
-
-经过JWT验证，之后附带Token的请求是具有权限的。
-
-### GET /profile
-
-获得自己的个人信息，注意由于Token可以验证身份故不需要指出用户名。
-
-#### 响应
-
-示例：
-
-```json
-{
-    "id": "96b302b8-3677-4056-a595-97af650a4e73",
-    "username": "abc",
-    "password": "pas",
-    "email": "a@b.c",
-    "phone": null
-}
-```
-
-### POST /profile/update
-
-更系个人信息，注意空值也会覆盖原值，若一个属性不变则需要在请求中照抄。
-
-#### 请求
-
-类似`GET /profile`的响应。
-
-示例一，修改上例的密码：
-
-```json
-{
-    "id": "96b302b8-3677-4056-a595-97af650a4e73",
-    "username": "abc",
-    "password": "supersecretpasswordislong",
-    "email": "a@b.c",
-    "phone": null
-}
-```
-
-示例二，删除邮箱（空值覆盖的体现）：
-
-```json
-{
-    "id": "96b302b8-3677-4056-a595-97af650a4e73",
-    "username": "abc",
-    "password": "supersecretpasswordislong",
-    "email": null,
-    "phone": null
-}
-```
-
-示例三，同上，缺失字段即为空值：
-
-```json
-{
-    "id": "96b302b8-3677-4056-a595-97af650a4e73",
-    "username": "abc",
-    "password": "supersecretpasswordislong",
-    "phone": null
-}
-```
-
-#### 响应
-
-成功返回消息`"success"`，失败返回状态`500`和错误消息。
-
-### GET /menu
+### GET /api/menu
 
 获取菜单。
 
@@ -207,7 +138,76 @@ Authorization: Cafe eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyX2EiLCJleHAiOjE1OTQ5NzY
 - `price`, `sales` - 浮点数和整数，代表单价和销量。
 - `desc`, `img` - 字符串，前者为餐点的文本描述，后者是图片的URL（可以利用公共图床）。
 
-### GET /order
+## 用户登录
+
+经过JWT验证，之后附带Token的请求是具有权限的。
+
+### GET /api/profile
+
+获得自己的个人信息，注意由于Token可以验证身份故不需要指出用户名。
+
+#### 响应
+
+示例：
+
+```json
+{
+    "id": "96b302b8-3677-4056-a595-97af650a4e73",
+    "username": "abc",
+    "password": "pas",
+    "email": "a@b.c",
+    "phone": null
+}
+```
+
+### POST /api/profile/update
+
+更系个人信息，注意空值也会覆盖原值，若一个属性不变则需要在请求中照抄。
+
+#### 请求
+
+类似`GET /profile`的响应。
+
+示例一，修改上例的密码：
+
+```json
+{
+    "id": "96b302b8-3677-4056-a595-97af650a4e73",
+    "username": "abc",
+    "password": "supersecretpasswordislong",
+    "email": "a@b.c",
+    "phone": null
+}
+```
+
+示例二，删除邮箱（空值覆盖的体现）：
+
+```json
+{
+    "id": "96b302b8-3677-4056-a595-97af650a4e73",
+    "username": "abc",
+    "password": "supersecretpasswordislong",
+    "email": null,
+    "phone": null
+}
+```
+
+示例三，同上，缺失字段即为空值：
+
+```json
+{
+    "id": "96b302b8-3677-4056-a595-97af650a4e73",
+    "username": "abc",
+    "password": "supersecretpasswordislong",
+    "phone": null
+}
+```
+
+#### 响应
+
+成功返回消息`"success"`，失败返回状态`500`和错误消息。
+
+### GET /api/order
 
 获取历史订单。
 
@@ -219,40 +219,54 @@ Authorization: Cafe eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyX2EiLCJleHAiOjE1OTQ5NzY
 [
     {
         "id" : "09b5e6da-c201-4b7d-b3a3-fc533f4fb770",
-        "content" : {
-            "珍珠奶茶" : 1,
-            "美式咖啡" : 1
-        },
+        "content" : [
+            {
+                "id" : "3c4f5b9e-fa5b-4366-8d96-c586253c436b",
+                "qty" : 1
+            },
+            {
+                "id" : "5745bb1c-ed5b-40b9-8ac4-3d4a5a45e76f",
+                "qty" : 2
+            }
+        ],
         "time" : "2020-07-14T00:29:29.000+00:00"
     },
     {
         "id" : "ce1edad5-5d8b-4f70-81f8-9b16921a5727",
-        "content" : {
-            "拿铁咖啡" : 2,
-            "摩卡咖啡" : 3
-        },
+        "content" : [
+            {
+                "id" : "42c19e3a-7ebe-4e39-9455-396c12b558c8",
+                "qty" : 10
+            }
+        ],
         "time" : "2020-07-09T03:28:00.000+00:00"
     }
 ]
 ```
 
-请注意为了用户段显示方便，餐点内容使用字典的方式显示（存在弊端：格式不合适，名称未必独特，有空再修改）。
+`id`为订单ID，而`content.id`为餐点ID，`content.qty`为餐点数量。
 
-### POST /order/new
+### POST /api/order/new
 
 创建新订单。
 
 #### 请求
 
-使用餐点ID和数量的字典（格式不合适，有空再修改）。
+使用餐点ID和数量的对象。
 
 示例，一杯拿铁和两杯苹果汁：
 
 ```json
-{
-    "3c4f5b9e-fa5b-4366-8d96-c586253c436b": 1,
-    "4bd57c99-f316-4067-93dd-950ee41a7acd": 2
-}
+[
+    {
+        "id" : "3c4f5b9e-fa5b-4366-8d96-c586253c436b",
+        "qty" : 1
+    },
+    {
+        "id" : "4bd57c99-f316-4067-93dd-950ee41a7acd",
+        "qty" : 2
+    }
+]
 ```
 
 #### 响应

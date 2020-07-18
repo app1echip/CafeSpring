@@ -18,7 +18,7 @@ public class MenuController {
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping(path = "/menu")
+    @GetMapping(path = "/api/menu")
     public @ResponseBody List<Food> menu() {
         List<Food> foods = foodService.list();
         for (Food food : foods)

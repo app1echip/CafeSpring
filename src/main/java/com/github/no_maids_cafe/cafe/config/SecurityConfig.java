@@ -16,15 +16,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        String[] anonymous = { "/authenticate", "/register", "/menu" };
-        String[] loggedin = { "/profile/**", "/order/**" };
+        String[] anonymous = { "/api/authenticate", "/api/register", "/api/menu" };
+        String[] loggedin = { "/api/**" };
         String[] superuser = { "/admin/**" };
         http.csrf().disable()
             .authorizeRequests()            
             .antMatchers(anonymous).permitAll()
             .antMatchers(loggedin).authenticated()
             .antMatchers(superuser).hasRole("ADMIN")
-            .anyRequest().denyAll()
+            .anyRequest().permitAll()
             .and().exceptionHandling().authenticationEntryPoint(entryPoint)
             .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);

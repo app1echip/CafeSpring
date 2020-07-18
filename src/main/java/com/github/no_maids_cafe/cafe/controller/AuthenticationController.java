@@ -22,7 +22,7 @@ public class AuthenticationController {
     @Autowired
     private TokenUtil tokenUtil;
 
-    @PostMapping(path = "/authenticate")
+    @PostMapping(path = "/api/authenticate")
     public @ResponseBody ResponseEntity<?> login(@RequestBody User user) {
         boolean match = userService.authenticate(user.getUsername(), user.getPassword());
         if (match) {

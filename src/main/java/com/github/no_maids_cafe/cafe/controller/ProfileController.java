@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(path = "/profile")
+@RequestMapping(path = "/api/profile")
 public class ProfileController {
     @Autowired
     private UserService userService;

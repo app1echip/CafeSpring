@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.github.no_maids_cafe.cafe.service.OrderService;
 import com.github.no_maids_cafe.cafe.service.UserService;
-import com.github.no_maids_cafe.cafe.model.OrderModel;
+import com.github.no_maids_cafe.cafe.model.OrderContent;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(path = "/order")
+@RequestMapping(path = "/api/order")
 public class OrderPlaceController {
     @Autowired
     private OrderService orderService;
@@ -27,14 +27,14 @@ public class OrderPlaceController {
     private UserService userService;
 
     @GetMapping(path = "")
-    public @ResponseBody List<OrderModel> get(Principal principal) {
+    public @ResponseBody List<OrderContent> get(Principal principal) {
         return orderService.getContentByUser(userService.getId(principal.getName()));
     }
 
     @PostMapping(path = "/new")
-    public @ResponseBody ResponseEntity<?> newOrder(@RequestBody Map<String, Integer> content, Principal principal) {
+    public @ResponseBody ResponseEntity<?> newOrder(@RequestBody List<OrderContent.Item> items, Principal principal) {
         String user = userService.getId(principal.getName());
-        String order = orderService.generate(content, user);
+        String order = orderService.generate(items, user);
         if (order == null || order.length() != 36) {
             return new ResponseEntity<String>("failed", HttpStatus.INTERNAL_SERVER_ERROR);
         }

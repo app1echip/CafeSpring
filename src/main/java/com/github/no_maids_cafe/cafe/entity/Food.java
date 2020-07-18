@@ -6,19 +6,19 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
+@Data
 @Entity
 public class Food {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private @Getter @Setter String id;
-    private @Getter @Setter String name;
-    private @Getter @Setter String cate;
-    private @Getter @Setter Double price;
-    private @Getter @Setter Integer sales;
-    private @Getter @Setter String des;
-    private @Getter @Setter String img;
+    private String id;
+    private String name;
+    private String cate;
+    private Double price;
+    private Integer sales;
+    private String des;
+    private String img;
 }

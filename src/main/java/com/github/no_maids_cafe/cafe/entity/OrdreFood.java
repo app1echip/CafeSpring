@@ -6,18 +6,19 @@ import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
+@Data
 @Entity
 public class OrdreFood {
     @EmbeddedId
-    private @Getter @Setter Id id;
-    private @Getter @Setter Integer qty;
+    private Id id;
+    private Integer qty;
 
+    @Data
     @Embeddable
     public static class Id implements Serializable {
-        private @Getter @Setter String ordre;
-        private @Getter @Setter String food;
+        private String ordre;
+        private String food;
     }
 }

@@ -2,7 +2,6 @@ package com.github.no_maids_cafe.cafe.controller;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Map;
 
 import com.github.no_maids_cafe.cafe.service.OrderService;
 import com.github.no_maids_cafe.cafe.service.UserService;

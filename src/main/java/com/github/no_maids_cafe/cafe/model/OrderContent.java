@@ -12,6 +12,9 @@ public class OrderContent {
     private List<Item> content;
     private Date time;
 
+    public OrderContent() {
+    };
+
     public OrderContent(Order order, List<OrderFood> orderFoods) {
         this.id = order.getId();
         this.time = order.getTime();
@@ -34,9 +37,12 @@ public class OrderContent {
         return time;
     }
 
-    public class Item {
+    public static class Item {
         private String id;
         private Integer qty;
+
+        public Item() {
+        }
 
         public Item(OrderFood orderFood) {
             this.id = orderFood.getId().getFood();

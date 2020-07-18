@@ -16,8 +16,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        String[] anonymous = { "/authenticate", "/register" };
-        String[] loggedin = { "/menu", "/profile/**", "/order/**" };
+        String[] anonymous = { "/authenticate", "/register", "/menu" };
+        String[] loggedin = { "/profile/**", "/order/**" };
         String[] superuser = { "/admin/**" };
         http.csrf().disable()
             .authorizeRequests()            

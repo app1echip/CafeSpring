@@ -1,4 +1,4 @@
-package com.github.no_maids_cafe.cafe.controller;
+package com.github.no_maids_cafe.cafe.controller.raw;
 
 import com.github.no_maids_cafe.cafe.entity.UserRole;
 import com.github.no_maids_cafe.cafe.service.UserRoleService;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/role")
+@RequestMapping("/admin/role")
 public class UserRoleController {
     @Autowired
     private UserRoleService UserRoleService;

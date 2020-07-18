@@ -1,4 +1,4 @@
-package com.github.no_maids_cafe.cafe.controller;
+package com.github.no_maids_cafe.cafe.controller.raw;
 
 import com.github.no_maids_cafe.cafe.entity.OrderFood;
 import com.github.no_maids_cafe.cafe.service.OrderFoodService;
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/orderfood")
-public class OrderFishController {
+@RequestMapping("/admin/orderfood")
+public class OrderFoodController {
     @Autowired
     private OrderFoodService orderfoodService;
 

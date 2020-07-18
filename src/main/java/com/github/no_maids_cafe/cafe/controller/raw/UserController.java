@@ -1,4 +1,4 @@
-package com.github.no_maids_cafe.cafe.controller;
+package com.github.no_maids_cafe.cafe.controller.raw;
 
 import com.github.no_maids_cafe.cafe.entity.User;
 import com.github.no_maids_cafe.cafe.service.UserService;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @CrossOrigin
-@RequestMapping("/user")
+@RequestMapping("/admin/user")
 public class UserController {
     @Autowired
     private UserService userService;

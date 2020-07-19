@@ -1,8 +1,9 @@
 package com.github.no_maids_cafe.cafe.repository;
 
 import com.github.no_maids_cafe.cafe.entity.Food;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface FoodRepository extends JpaRepository<Food, Integer> {
+import org.springframework.data.repository.CrudRepository;
+
+public interface FoodRepository extends CrudRepository<Food, Integer> {
     Food findById(String id);
 }

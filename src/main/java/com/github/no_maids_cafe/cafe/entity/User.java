@@ -8,8 +8,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Data;
 
-@Entity
 @Data
+@Entity
 public class User {
     @Id
     @GeneratedValue(generator = "uuid")

@@ -8,24 +8,21 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
-    private UserAuthenticationEntryPoint entryPoint;
+    private EntryPoint entry;
     @Autowired
     private RequestFilter filter;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        String[] anonymous = { "/api/authenticate", "/api/register", "/api/menu" };
-        String[] loggedin = { "/api/**" };
-        String[] superuser = { "/admin/**" };
         http.csrf().disable()
-            .authorizeRequests()            
-            .antMatchers(anonymous).permitAll()
-            .antMatchers(loggedin).authenticated()
-            .antMatchers(superuser).hasRole("ADMIN")
+            .authorizeRequests()
+            .antMatchers("/pub/**").permitAll()
+            .antMatchers("/api/**").authenticated()
+            .antMatchers("/admin/**").hasRole("ADMIN")
             .anyRequest().permitAll()
-            .and().exceptionHandling().authenticationEntryPoint(entryPoint)
+            .and().exceptionHandling().authenticationEntryPoint(entry)
             .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
     }

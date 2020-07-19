@@ -1,7 +1,7 @@
 package com.github.no_maids_cafe.cafe.controller.raw;
 
-import com.github.no_maids_cafe.cafe.entity.User;
-import com.github.no_maids_cafe.cafe.service.UserService;
+import com.github.no_maids_cafe.cafe.entity.OrdreFood;
+import com.github.no_maids_cafe.cafe.service.OrdreFoodService;
 import com.github.no_maids_cafe.cafe.util.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,22 +14,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class UserController {
+public class OrdreFoodController {
     @Autowired
-    private UserService service;
+    private OrdreFoodService service;
 
-    @GetMapping("/admin/user")
-    public @ResponseBody Iterable<User> list() {
+    @GetMapping("/admin/ordre_food")
+    public @ResponseBody Iterable<OrdreFood> list() {
         return service.list();
     }
 
-    @PostMapping("/admin/user/update")
-    public @ResponseBody ResponseEntity<?> update(@RequestBody User entity) {
+    @PostMapping("/admin/ordre_food/update")
+    public @ResponseBody ResponseEntity<?> update(@RequestBody OrdreFood entity) {
         return Query.response(service::update, entity);
     }
 
-    @DeleteMapping("/admin/user/delete")
-    public @ResponseBody ResponseEntity<?> delete(@RequestBody User entity) {
+    @DeleteMapping("/admin/ordre_food/delete")
+    public @ResponseBody ResponseEntity<?> delete(@RequestBody OrdreFood entity) {
         return Query.response(service::delete, entity);
     }
 }

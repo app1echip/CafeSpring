@@ -3,39 +3,22 @@ package com.github.no_maids_cafe.cafe.service;
 import com.github.no_maids_cafe.cafe.entity.Food;
 import com.github.no_maids_cafe.cafe.repository.FoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class FoodService {
     @Autowired
-    private FoodRepository foodRepository;
+    private FoodRepository repository;
 
-    public List<Food> list() {
-        return foodRepository.findAll();
+    public Iterable<Food> list() {
+        return repository.findAll();
     }
 
-    public String update(Food food) {
-        try {
-            foodRepository.save(food);
-        } catch (DataIntegrityViolationException exception) {
-            return "failure: " + exception.getMessage();
-        }
-        return "success";
+    public void update(Food entity) {
+        repository.save(entity);
     }
 
-    public String delete(Food food) {
-        try {
-            foodRepository.delete(food);
-        } catch (DataIntegrityViolationException exception) {
-            return "failure: " + exception.getMessage();
-        }
-        return "success";
-    }
-
-    public String getName(String id) {
-        return foodRepository.findById(id).getName();
+    public void delete(Food entity) {
+        repository.delete(entity);
     }
 }

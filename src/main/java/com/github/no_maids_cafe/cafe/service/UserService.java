@@ -2,40 +2,30 @@ package com.github.no_maids_cafe.cafe.service;
 
 import com.github.no_maids_cafe.cafe.entity.User;
 import com.github.no_maids_cafe.cafe.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.Arrays;
 
 @Service
 public class UserService {
     @Autowired
-    UserRepository userRepository;
+    private UserRepository repository;
+    @Autowired
+    private UserRoleService roles;
 
-    public List<User> list() {
-        return userRepository.findAll();
+    public Iterable<User> list() {
+        return repository.findAll();
     }
 
-    public String update(User user) {
-        try {
-            userRepository.save(user);
-        } catch (DataIntegrityViolationException exception) {
-            return "failure: " + exception.getMessage();
-        }
-        return "success";
+    public void update(User user) {
+        repository.save(user);
     }
 
-    public String delete(User user) {
-        try {
-            userRepository.delete(user);
-        } catch (DataIntegrityViolationException exception) {
-            return "failure: " + exception.getMessage();
-        }
-        return "success";
+    public void delete(User user) {
+        repository.delete(user);
     }
 
     public boolean authenticate(String username, String password) {
@@ -44,26 +34,31 @@ public class UserService {
     }
 
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return repository.findByUsername(username);
     }
 
-    public String getId(String username) {
+    public String getIdByUsername(String username) {
         User user = findByUsername(username);
         if (user == null)
             return null;
         return user.getId();
     }
 
-
     public boolean add(User user) {
-        if (user.getId() != null || userRepository.findByUsername(user.getUsername()) != null)
+        user.setId(null);
+        String username = user.getUsername();
+        String password = user.getPassword();
+        if (repository.findByUsername(username) != null || password == null)
             return false;
-        user.setId(UUID.randomUUID().toString());
-        return update(user) == "success";
+        update(user);
+        return true;
     }
 
-    public UserDetails getDetails(User user) {
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-                new ArrayList<>());
+    public org.springframework.security.core.userdetails.User getDetail(User user) {
+        String name = user.getUsername();
+        String pass = user.getPassword();
+        String role = roles.getUserRole(user.getId());
+        var auth = Arrays.asList(new SimpleGrantedAuthority(role));
+        return new org.springframework.security.core.userdetails.User(name, pass, auth);
     }
 }

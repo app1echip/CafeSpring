@@ -7,7 +7,6 @@ import com.github.no_maids_cafe.cafe.repository.OrdreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -33,7 +32,6 @@ public class OrdreService {
     public String createFromItemsAndUserId(Iterable<OrderDetails.Item> items, String user) {
         Ordre ordre = new Ordre();
         ordre.setUser(user);
-        ordre.setTime(new Date());
         this.update(ordre);
         String id = ordre.getId();
         for (OrderDetails.Item item : items) {

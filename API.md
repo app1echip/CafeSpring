@@ -370,6 +370,9 @@ DELETE /admin/food/delete
 ```
 
 实际上后端可以接受的格式和`PUT /admin/food/update`相同，但附加除了`id`之外的其它字段显然是没有意义的。  
+
+所有增、删和改的操作如果发生错误，则返回状态`500`。
+
 其他表的格式如下：
 
 ### /admin/user

@@ -372,7 +372,7 @@ DELETE /admin/food/delete
 实际上后端可以接受的格式和`PUT /admin/food/update`相同，但附加除了`id`之外的其它字段显然是没有意义的。  
 其他表的格式如下：
 
-#### /admin/user
+### /admin/user
 
 所有的用户信息，增删该查操作和上述操作类似。
 
@@ -386,7 +386,7 @@ DELETE /admin/food/delete
 }
 ```
 
-#### /admin/user_role
+### /admin/user_role
 
 用户角色表，只需要查询和修改。
 
@@ -399,7 +399,7 @@ DELETE /admin/food/delete
 
 `role`可选`ROLE_USER`或者`ROLE_ADMIN`，`user`为用户ID。
 
-#### /admin/ordre
+### /admin/ordre
 
 订单表（与用户专属API不同，不含订单餐点内容）。
 
@@ -414,7 +414,7 @@ DELETE /admin/food/delete
 注意在管理API和数据库中订单叫做"ordre"而不是"order"。  
 `id`为订单ID，`time`为订单时间，`user`为用户ID。
 
-#### /admin/ordre_food
+### /admin/ordre_food
 
 订单内容表。
 

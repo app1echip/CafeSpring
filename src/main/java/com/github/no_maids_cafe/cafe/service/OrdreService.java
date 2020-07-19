@@ -2,9 +2,7 @@ package com.github.no_maids_cafe.cafe.service;
 
 import com.github.no_maids_cafe.cafe.entity.Ordre;
 import com.github.no_maids_cafe.cafe.entity.OrdreFood;
-import com.github.no_maids_cafe.cafe.entity.OrdreFood.Id;
-import com.github.no_maids_cafe.cafe.model.Content;
-import com.github.no_maids_cafe.cafe.model.Content.Item;
+import com.github.no_maids_cafe.cafe.model.OrderDetails;
 import com.github.no_maids_cafe.cafe.repository.OrdreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,27 +30,27 @@ public class OrdreService {
         orderRepository.delete(order);
     }
 
-    public String createFromItems(Iterable<Item> items, String user) {
-        Ordre order = new Ordre();
-        order.setUser(user);
-        order.setTime(new Date());
-        this.update(order);
-        String id = order.getId();
-        for (Item item : items) {
-            OrdreFood orderFood = new OrdreFood();
-            Id ofId = new Id();
-            ofId.setOrdre(id);
-            ofId.setFood(item.getId());
-            orderFood.setId(ofId);
-            orderFood.setQty(item.getQty());
-            orderFoodService.update(orderFood);
+    public String createFromItemsAndUserId(Iterable<OrderDetails.Item> items, String user) {
+        Ordre ordre = new Ordre();
+        ordre.setUser(user);
+        ordre.setTime(new Date());
+        this.update(ordre);
+        String id = ordre.getId();
+        for (OrderDetails.Item item : items) {
+            OrdreFood orderfood = new OrdreFood();
+            OrdreFood.Id orderfoodId = new OrdreFood.Id();
+            orderfoodId.setOrdre(id);
+            orderfoodId.setFood(item.getId());
+            orderfood.setId(orderfoodId);
+            orderfood.setQty(item.getQty());
+            orderFoodService.update(orderfood);
         }
         return id;
     }
 
-    public Iterable<Content> getContentByUser(String user) {
+    public Iterable<OrderDetails> getDetailsByUserId(String user) {
         return StreamSupport.stream(orderRepository.findAllByUser(user).spliterator(), false)
-                .map(order -> new Content(order, orderFoodService.getContent(order.getId())))
+                .map(order -> new OrderDetails(order, orderFoodService.getContent(order.getId())))
                 .collect(Collectors.toList());
     }
 }

@@ -1,7 +1,6 @@
 package com.github.no_maids_cafe.cafe.util;
 
 import java.util.function.Consumer;
-import java.util.function.Function;
 import org.springframework.http.ResponseEntity;
 
 import lombok.experimental.UtilityClass;

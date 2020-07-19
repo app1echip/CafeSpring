@@ -12,12 +12,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public class Content {
+public class OrderDetails {
     private @Getter String id;
     private @Getter List<Item> content;
     private @Getter Date time;
 
-    public Content(Ordre order, Iterable<OrdreFood> orderFoods) {
+    public OrderDetails(Ordre order, Iterable<OrdreFood> orderFoods) {
         this.id = order.getId();
         this.time = order.getTime();
         this.content = StreamSupport.stream(orderFoods.spliterator(), false).map(Item::new)

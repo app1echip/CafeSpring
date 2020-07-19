@@ -4,8 +4,7 @@ import java.security.Principal;
 
 import com.github.no_maids_cafe.cafe.service.OrdreService;
 import com.github.no_maids_cafe.cafe.service.UserService;
-import com.github.no_maids_cafe.cafe.model.Content;
-import com.github.no_maids_cafe.cafe.model.Content.Item;
+import com.github.no_maids_cafe.cafe.model.OrderDetails;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,14 +23,14 @@ public class OrderController {
     private UserService userService;
 
     @GetMapping("/api/order")
-    public @ResponseBody Iterable<Content> get(Principal principal) {
-        return orderService.getContentByUser(userService.getIdByUsername(principal.getName()));
+    public @ResponseBody Iterable<OrderDetails> get(Principal principal) {
+        return orderService.getDetailsByUserId(userService.getIdByUsername(principal.getName()));
     }
 
     @PostMapping("/api/order/new")
-    public @ResponseBody ResponseEntity<?> put(@RequestBody Iterable<Item> items, Principal principal) {
+    public @ResponseBody ResponseEntity<?> put(@RequestBody Iterable<OrderDetails.Item> items, Principal principal) {
         String user = userService.getIdByUsername(principal.getName());
-        String order = orderService.createFromItems(items, user);
+        String order = orderService.createFromItemsAndUserId(items, user);
         if (order == null || order.length() != 36)
             return new ResponseEntity<String>("failed", HttpStatus.INTERNAL_SERVER_ERROR);
         return ResponseEntity.ok(order);

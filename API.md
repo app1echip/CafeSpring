@@ -59,12 +59,16 @@ CafeSpring API 文档
 
 #### 响应
 
-成功则返回JWT。
+成功则返回JWT、过期时间和角色。
 
 示例：
 
-```text
-eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyX2EiLCJleHAiOjE1OTQ5NzYzMDksImlhdCI6MTU5NDk3MjcwOX0.9q7Sq682YRlIUxHtxU22V7QgJncMRgvrdgxHxwxJiF3388wp331h3L4jpBSq75NrygRt2yGY0qg-FLreAB-9WA
+```json
+{
+    "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyX2EiLCJleHAiOjE1OTQ5NzYzMDksImlhdCI6MTU5NDk3MjcwOX0.9q7Sq682YRlIUxHtxU22V7QgJncMRgvrdgxHxwxJiF3388wp331h3L4jpBSq75NrygRt2yGY0qg-FLreAB-9WA",
+    "expire": "2020-07-09T03:28:00.000+00:00",
+    "role": "ROLE_USER"
+}
 ```
 
 失败则返回状态`401`和自定义消息。

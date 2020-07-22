@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -24,7 +25,7 @@ public class ProfileController {
     }
 
     @PostMapping("/api/profile/update")
-    public @ResponseBody ResponseEntity<?> update(User entity, Principal principal) {
+    public @ResponseBody ResponseEntity<?> update(@RequestBody User entity, Principal principal) {
         entity.setId(service.getIdByUsername(principal.getName()));
         return Query.response(service::update, entity);
     }
